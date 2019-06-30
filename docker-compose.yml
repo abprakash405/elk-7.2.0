@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
 
@@ -9,6 +9,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - elasti_data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -61,6 +62,14 @@ services:
     depends_on:
       - kibana
 
+volumes:
+  elasti_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./elasticsearch/data
+      o: bind
+ 
 networks:
   elk:
     driver: bridge
