@@ -3,6 +3,10 @@ FROM  ubuntu:latest
 
 RUN apt-get update
 
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get -y install tzdata
+
+
 RUN apt-get install apache2 -y
 
 RUN apt-get install wget gnupg default-jdk  -y
